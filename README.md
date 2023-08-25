@@ -27,3 +27,17 @@ sh auto_build.sh
 ```
 pytest --collect-only tests
 ```
+#### 有效的 Appium Python 套件應產生輸出如下：
+``` 
+================================================================================== test session starts ==================================================================================
+platform darwin -- Python 3.9.1, pytest-7.4.0, pluggy-1.2.0
+rootdir: /Users/leiyong/Documents/code3/testing/insta-page-load-automation
+collected 1 item                                                                                                                                                                        
+
+<Package tests>
+  <Module test_case.py>
+    <Class TestAppium>
+      <Function test_appium_flow>
+
+=============================================================================== 1 test collected in 0.16s ===============================================================================
+```
