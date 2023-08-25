@@ -22,3 +22,8 @@
 ```
 sh auto_build.sh
 ```
+
+## 本地测试pytest能否收集到测试用例
+```
+pytest --collect-only tests
+```
