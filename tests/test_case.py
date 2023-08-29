@@ -13,11 +13,13 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+PACKAGE = 'ai.instameta.android'
+
 
 @pytest.fixture(scope="module")
 def driver():
     desired_caps = {
-        'appPackage': 'ai.instameta.android',
+        'appPackage': PACKAGE,
         'appActivity': 'android.base.app.mvp.ui.activity.SplashActivity',
         'platformName': 'Android',
         'deviceName': 'Android Emulator'
@@ -52,7 +54,7 @@ class TestAppium:
     def test_01_front_page_youmaylike(self, driver):
 
         # wait for the homepage to appear
-        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/item_name'), timeout=20)
+        element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/item_name'), timeout=20)
 
         if not element:
             raise Exception("test_01_front_page_youmaylike DID NOT ENTER THE HOME PAGE")
@@ -63,21 +65,21 @@ class TestAppium:
 
     def test_02_dp_youmaylike(self, driver):
         # enter the product details page from youmaylike
-        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/cm_item_price'), timeout=5)
+        element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/cm_item_price'), timeout=5)
         if not element:
             raise Exception("test_02_dp_youmaylike NO CLICKABLE ITEMS FOUND")
         element.click()
 
         # judging whether it is an ordinary commodity
-        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/btn_shoppingcart_home'), timeout=5)
+        element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/btn_shoppingcart_home'), timeout=5)
         if not element:
 
             # enter the product details page from the feed card
-            element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/cm_item_name'), timeout=3)
+            element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/cm_item_name'), timeout=3)
             if element:
                 element.click()
 
-            element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/btn_shoppingcart_home'), timeout=5)
+            element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/btn_shoppingcart_home'), timeout=5)
             if not element:
                 raise Exception("test_02_dp_youmaylike NOT FOUND")
 
@@ -87,7 +89,7 @@ class TestAppium:
             time.sleep(1)
 
         # RETURN HOME
-        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/btn_shoppingcart_home'), timeout=5)
+        element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/btn_shoppingcart_home'), timeout=5)
         if element:
             element.click()
 
@@ -101,31 +103,31 @@ class TestAppium:
         element.click()
 
         # insta beginner s guide 1
-        element = self.wait_for_element(driver, (MobileBy.XPATH, '//*[@resource-id="ai.instameta.android:id/bg_guide_step1"]'), timeout=5)
+        element = self.wait_for_element(driver, (MobileBy.XPATH, f'//*[@resource-id="{PACKAGE}:id/bg_guide_step1"]'), timeout=5)
         if element:
 
             # next
-            element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/tv2_guide_step1'), timeout=5)
+            element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/tv2_guide_step1'), timeout=5)
             element.click()
 
         # insta beginner s guide 2
-        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/bg_guide_step2'), timeout=5)
+        element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/bg_guide_step2'), timeout=5)
         if element:
 
             # next
-            element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/tv2_guide_step2'), timeout=5)
+            element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/tv2_guide_step2'), timeout=5)
             element.click()
 
         # insta beginner s guide 3
-        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/tv_guide_step2'), timeout=10)
+        element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/tv_guide_step2'), timeout=10)
         if element:
 
             # complete
-            element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/tv_guide_step2'), timeout=10)
+            element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/tv_guide_step2'), timeout=10)
             element.click()
 
         # did you successfully enter insta
-        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/avatar_insta_author'), timeout=10)
+        element = self.wait_for_element(driver, (MobileBy.ID, f'{PACKAGE}:id/avatar_insta_author'), timeout=10)
         if element:
             # vertical swipe load post
             for i in range(15):
