@@ -49,19 +49,56 @@ class TestAppium:
             print(f"element_not_found: {locator}")
             return False
 
-    def test_appium_flow(self, driver):
+    def test_01_front_page_youmaylike(self, driver):
 
         # wait for the homepage to appear
-        element = self.wait_for_element(driver, (MobileBy.XPATH, '//*[@text="Insta"]'), timeout=20)
+        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/item_name'), timeout=20)
 
+        if not element:
+            raise Exception("test_01_front_page_youmaylike DID NOT ENTER THE HOME PAGE")
+        # home vertical slide load youmaylike
+        for i in range(3):
+            driver.swipe(500, 900, 500, 200, 200)
+            time.sleep(1)
+
+    def test_02_dp_youmaylike(self, driver):
+        # enter the product details page from youmaylike
+        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/cm_item_price'), timeout=5)
+        if not element:
+            raise Exception("test_02_dp_youmaylike NO CLICKABLE ITEMS FOUND")
+        element.click()
+
+        # judging whether it is an ordinary commodity
+        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/btn_shoppingcart_home'), timeout=5)
+        if not element:
+
+            # enter the product details page from the feed card
+            element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/cm_item_name'), timeout=3)
+            if element:
+                element.click()
+
+            element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/btn_shoppingcart_home'), timeout=5)
+            if not element:
+                raise Exception("test_02_dp_youmaylike NOT FOUND")
+
+        # home vertical slide load youmaylike
+        for i in range(10):
+            driver.swipe(500, 900, 500, 200, 200)
+            time.sleep(1)
+
+        # RETURN HOME
+        element = self.wait_for_element(driver, (MobileBy.ID, 'ai.instameta.android:id/btn_shoppingcart_home'), timeout=5)
         if element:
-            # home vertical slide load youmaylike
-            for i in range(15):
-                driver.swipe(500, 900, 500, 200, 200)
-                time.sleep(1)
-
-            # switch to insta
             element.click()
+
+    def test_03_insta(self, driver):
+        # wait for the homepage to appear
+        element = self.wait_for_element(driver, (MobileBy.XPATH, '//*[@text="Insta"]'), timeout=20)
+        if not element:
+            raise Exception("test_03_insta INSTA NOT FOUND")
+
+        # switch to insta
+        element.click()
 
         # insta beginner s guide 1
         element = self.wait_for_element(driver, (MobileBy.XPATH, '//*[@resource-id="ai.instameta.android:id/bg_guide_step1"]'), timeout=5)
