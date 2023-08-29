@@ -57,7 +57,7 @@ class TestAppium:
         if not element:
             raise Exception("test_01_front_page_youmaylike DID NOT ENTER THE HOME PAGE")
         # home vertical slide load youmaylike
-        for i in range(3):
+        for i in range(15):
             driver.swipe(500, 900, 500, 200, 200)
             time.sleep(1)
 
@@ -82,7 +82,7 @@ class TestAppium:
                 raise Exception("test_02_dp_youmaylike NOT FOUND")
 
         # home vertical slide load youmaylike
-        for i in range(10):
+        for i in range(20):
             driver.swipe(500, 900, 500, 200, 200)
             time.sleep(1)
 
