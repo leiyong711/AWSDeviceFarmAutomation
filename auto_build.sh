@@ -13,4 +13,4 @@ find . -name '*.pyo' -exec rm -f {} +
 find . -name '*~' -exec rm -f {} +
 
 # 压缩文件和文件夹
-zip -r test_bundle.zip tests/ requirements.txt
+zip -r instameta_test_bundle.zip tests/ requirements.txt
